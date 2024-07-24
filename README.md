@@ -1,0 +1,1 @@
+A web service for budget management that stores events and event participants with their expenses and payments.
