@@ -1,0 +1,26 @@
+body {
+    color: white;
+    background-color: black;
+    background-image: url(/money_bg.jpg);
+    background-size: cover;
+    margin-left: auto;
+    margin-left: auto;
+    padding: 1vh;
+    text-align: center;
+    font-family: "Ubuntu", sans-serif;
+}
+h1 {
+    font-size: 20vh;
+}
+
+input, button {
+    margin: 1vh;
+}
+nav {
+    display: inline-block;
+    justify-content: space-between;
+}
+a .nav {
+    margin-right: 10vh;
+    margin-left: 10vh;
+}
