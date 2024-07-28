@@ -1,0 +1,63 @@
+body {
+    color: white;
+    background-color: black;
+    background-image: url(money_bg.jpg);
+    background-size: cover;
+    padding: 2vh;
+    text-align: center;
+    font-family: "Ubuntu", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+}
+h2 {
+    font-size: 7vh;
+    width: 75%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+h3 {
+    font-size: 2vh;
+    width: 75%;
+    text-align: center;
+    margin: 0 auto;
+}
+div {
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+}
+input, button {
+    margin: 1vh auto;
+    display: block;
+}
+nav {
+    display: inline-block;
+    justify-content: space-between;
+    /* justify-content: center; центрируем навигацию */
+    padding: 10px;
+}
+nav ul li {
+    display:inline;
+    margin: 0 10px;
+}
+nav ul li a {
+   display:inline-block;
+   /*   padding:10px;  */
+    color: blanchedalmond;
+    text-decoration: none;
+}
+
+#divEvent a{
+    color: white;
+    background-color: black;
+    opacity: 0.7;
+}
+
+p {
+    margin-top: 1%;
+    font-weight: bold;
+    font-size: 3vh;
+    margin: 0 auto;
+
+}
