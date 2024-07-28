@@ -2,11 +2,11 @@ const currentUrl = window.location.href;
 
 // let lastUrl = currentUrl.split('/').pop();
 
-if (!userId) {
-  console.error("User ID not found in local storage.");
+if (!userName) {
+  console.error("User not found in local storage.");
   window.location.href = "login.html"; 
 } else {
-      fetch("api/users/" + lastUrl) 
+      fetch("api/users/" + userName) 
           .then((res) => res.json())
           .then((dataJson) => {
               const userData = JSON.parse(dataJson);      

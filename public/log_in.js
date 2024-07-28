@@ -23,7 +23,7 @@ function sendToLogin(event) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            localStorage.setItem("userId", data.id);
+            localStorage.setItem("userName", data.username, "userId", data.id);
             // window.location.href = `user_page.html?id=${data.id}`;
             window.location.href = `user_page.html`;
         } else {
