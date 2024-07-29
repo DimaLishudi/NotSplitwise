@@ -34,11 +34,11 @@ export const db = knex({
 
 
 // FOR DEBUG: drop all tables
-// await db.schema.dropTableIfExists("debts");
-// await db.schema.dropTableIfExists("users_events");
-// await db.schema.dropTableIfExists("events");
-// await db.schema.dropTableIfExists("hashpwd");
-// await db.schema.dropTableIfExists("users");
+    // await db.schema.dropTableIfExists("debts");
+    // await db.schema.dropTableIfExists("users_events");
+    // await db.schema.dropTableIfExists("events");
+    // await db.schema.dropTableIfExists("hashpwd");
+    // await db.schema.dropTableIfExists("users");
 
 if (!(await db.schema.hasTable("users"))) {
     console.log("Creating users table...");

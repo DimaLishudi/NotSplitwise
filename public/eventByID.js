@@ -18,15 +18,15 @@ const user_id = localStorage.getItem("user_id")
 const eventSection = document.getElementById("currentEvent");
 const eventTable = document.createElement("table");
 
-if (username === null) {
-    window.location.href = origin + "sign_in.html";
-}
 
 const currentUrl = window.location.href;
-let lastUrl = currentUrl.split('/').pop();
+const lastUrl = currentUrl.split('/').pop();
 const origin = window.location.origin + "/";
 const api_url = origin + "api/events/" + lastUrl;
 
+if (username === null) {
+    window.location.href = origin + "signup.html";
+}
 
 
 function displayPaidSpentRow(item) {
