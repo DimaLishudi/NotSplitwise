@@ -2,7 +2,7 @@ import { db } from "../config/db.js"
 import { HTTPError } from "../errors/errors.js";
 
 export async function createEvent() {
-    const { id } = (await db("events").insert({}, "id"))[0];
+    const id = (await db("events").insert({}, "id"))[0];
     return id;
 }
 

@@ -11,16 +11,16 @@
 //     to: name3,
 //     amount: 152,
 // },
-// ]
 
 
-const userName = localStorage.getItem("userName");
-const userId = localStorage("userId")
+const username = localStorage.getItem("user_name");
+const user_id = localStorage.getItem("user_id")
 const eventSection = document.getElementById("currentEvent");
 const eventTable = document.createElement("table");
+const origin = window.location.origin + "/";
 
 
-function forNewInput(item) {
+function displayPaidSpentRow(item) {
     const row = eventTable.insertRow();
     Object.keys(item).forEach(key => {
         const cell = row.insertCell();
@@ -32,40 +32,37 @@ function forNewInput(item) {
     });
 }
 
-if (userName != null) {
-    alert("You should log in");
-    window.location.href = "sign_in.html";
-    throw new Error("You are not logged in.");
+function displayPaidSpentTable(data) {
+    console.log(data);
+    let isUserinBase = false;
 
+    data.users.forEach(item => {
+        if (item.username === username) {
+            isUserinBase = true;
+        }
+
+        displayPaidSpentRow(item);
+    });
+
+    if (!isUserinBase) {
+        const newRow = {username, user_id, spent: 0, paid: 0}
+        data.users.push(newRow);
+        displayPaidSpentRow(newRow)
+    }
 }
+
+if (username === null) {
+    window.location.href = origin + "sign_in.html";
+}
+
 const currentUrl = window.location.href;
 
 let lastUrl = currentUrl.split('/').pop();
 
-fetch("api/events/" + lastUrl)
-    .then((res) => res.json())
-    .then((dataJson) => {
-        const dataReceived = JSON.parse(dataJson);
-
-// const dataReceived = fakeJSON;
-
-        let isUserinBase = false;
-
-        dataReceived.users.forEach(item => {
-            if (item.username === userName) {
-                isUserinBase = true;
-            }
-
-            forNewInput(item);
-        });
-
-        if (!isUserinBase) {
-            dataReceived.push({userName: username, userId: userid, spent: 0, paid: 0});
-            let newString = dataReceived[datdaReceived.length-1];
-            // forNewInput(item);
-            forNewInput(newString)
-        }
-
+fetch(origin + "api/events/" + lastUrl)
+    .then(res => res.json())
+    .then(displayPaidSpentTable)
+    .then(() => {
         const sendButton = document.createElement("button");
         sendButton.textContent = "Save Changes";
         sendButton.addEventListener("click", () => {
@@ -82,7 +79,7 @@ fetch("api/events/" + lastUrl)
             }
 
 
-    console.log("Updated data to be sent:", JSON.stringify(updatedData));
+            console.log("Updated data to be sent:", JSON.stringify(updatedData));
 
             fetch("api/events/" + lastUrl, {
                 method: "PUT",
@@ -106,7 +103,6 @@ fetch("api/events/" + lastUrl)
         eventSection.appendChild(eventTable);
         eventSection.appendChild(sendButton);
     })
-
     .catch((error) => {
         console.error('Error:', error);
     });

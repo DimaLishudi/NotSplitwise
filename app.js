@@ -34,13 +34,23 @@
 
 import express from "express"
 import { router as apiRouter } from "./src/routes/api.js"
+import { router as viewsRouter } from "./src/routes/views.js"
 import cors from "cors"
 
 const app = express();
+
+app.use(express.static("public"));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use("/api", apiRouter);
+app.use("/",    viewsRouter);
+
+app.get("*", (req, res) => {
+    res.redirect('/');
+});
+
 
 app.listen(process.env.PORT || 5000, () => {
     console.log("Start listening");

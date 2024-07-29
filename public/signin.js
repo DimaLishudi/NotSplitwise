@@ -2,14 +2,20 @@
 
 document.getElementById("signin").addEventListener("submit", sendNewUser);
 
+
 function sendNewUser(event) {
     event.preventDefault();
 
 
     const form = event.target;
-    const userName = form.userName.value;
+    const username = form.username.value;
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
+    console.log(form);
+
+    const formdata = (new FormData(form));
+    console.log(formdata);
+    console.log(formdata.get(""));
 
     if (password !== confirmPassword) {
         alert("Passwords do not match!");
@@ -17,7 +23,7 @@ function sendNewUser(event) {
     }
 
     const newUser = {
-        userName: userName,
+        username: username,
         password: password
     };
 
