@@ -61,3 +61,10 @@ p {
     margin: 0 auto;
 
 }
+span {
+    height: 20%;
+}
+span a {
+    text-decoration: none;
+    color: rgb(176, 118, 82);
+}

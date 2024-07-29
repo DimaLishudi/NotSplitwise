@@ -40,7 +40,7 @@ function sendToLogin(event) {
         }
     })
     .catch(error => {
-        console.error("Error:", error);
+        console.error("Error:", error); 
     });
 }
 
