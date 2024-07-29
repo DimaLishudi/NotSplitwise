@@ -33,11 +33,11 @@ export async function finaliseEvent(req, res) {
         checkRequestFields(req, ["id"]);
         const eventInfo = await model.getEventInfo(req.params.id);
         if (eventInfo.finalised) {
-            res.status(400).send("Event already finalised");
+            res.status(400).send({message: "Event already finalised"});
             return;
         }
         if (eventInfo.total_spent != eventInfo.total_paid) {
-            res.status(400).send("Total spent should be equal to total_paid");
+            res.status(400).send({message: "Total spent should be equal to total_paid"});
             return;
         }
 

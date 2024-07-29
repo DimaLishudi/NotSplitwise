@@ -9,7 +9,7 @@ export class HTTPError extends Error {
     }
 
     resolve(res) {
-        res.status(this.status).send(this.response_message);
+        res.status(this.status).json({message: this.response_message});
         console.log(this.message);
     }
 }

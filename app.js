@@ -47,9 +47,9 @@ app.use(cors());
 app.use("/api", apiRouter);
 app.use("/",    viewsRouter);
 
-app.get("*", (req, res) => {
-    res.redirect('/');
-});
+// app.get("*", (req, res) => {
+//     res.redirect('/');
+// });
 
 
 app.listen(process.env.PORT || 5000, () => {

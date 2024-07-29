@@ -13,23 +13,32 @@
 // },
 
 
-const username = localStorage.getItem("user_name");
+const username = localStorage.getItem("username");
 const user_id = localStorage.getItem("user_id")
 const eventSection = document.getElementById("currentEvent");
 const eventTable = document.createElement("table");
+
+if (username === null) {
+    window.location.href = origin + "sign_in.html";
+}
+
+const currentUrl = window.location.href;
+let lastUrl = currentUrl.split('/').pop();
 const origin = window.location.origin + "/";
+const api_url = origin + "api/events/" + lastUrl;
+
 
 
 function displayPaidSpentRow(item) {
     const row = eventTable.insertRow();
-    Object.keys(item).forEach(key => {
+    for (let key of ["use   rname", "paid", "spent"]) {
         const cell = row.insertCell();
         const input = document.createElement("input");
         input.type = "text";
         input.name = key;
         input.value = item[key];
         cell.appendChild(input);
-    });
+    };
 }
 
 function displayPaidSpentTable(data) {
@@ -51,15 +60,7 @@ function displayPaidSpentTable(data) {
     }
 }
 
-if (username === null) {
-    window.location.href = origin + "sign_in.html";
-}
-
-const currentUrl = window.location.href;
-
-let lastUrl = currentUrl.split('/').pop();
-
-fetch(origin + "api/events/" + lastUrl)
+fetch(api_url)
     .then(res => res.json())
     .then(displayPaidSpentTable)
     .then(() => {
@@ -79,9 +80,7 @@ fetch(origin + "api/events/" + lastUrl)
             }
 
 
-            console.log("Updated data to be sent:", JSON.stringify(updatedData));
-
-            fetch("api/events/" + lastUrl, {
+            fetch(api_url, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -119,8 +118,8 @@ function showDebts(event) {
         input.readOnly = true;
     });
 
-    fetch("/api/finalise" + lastUrl, {method: "POST"}) // или какая апишечка у нас?
-    .then((res) => res.json())
+    fetch(api_url, {method: "POST"})
+    .then(res => res.json())
     .then((dataJson) => {
     //    const finalCalculation = JSON.parse(dataJson);
 
