@@ -54,7 +54,7 @@ function displayPaidSpentTable(data) {
     });
 
     if (!isUserinBase) {
-        const newRow = {username, user_id, spent: 0, paid: 0}
+        const newRow = {username, user_id, spent: "Enter the amount spent", paid: "Enter the amount paid"}
         data.users.push(newRow);
         displayPaidSpentRow(newRow)
     }

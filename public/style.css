@@ -68,3 +68,11 @@ span a {
     text-decoration: none;
     color: rgb(176, 118, 82);
 }
+section#currentEvent table {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    /* display: block;
+    justify-content: center; */
+    width: 70%;
+}
