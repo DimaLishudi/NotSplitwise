@@ -6,10 +6,10 @@
 //     amount: 234,
 // },
 // {
-//     event_id: 1,
-//     from: name1,
-//     to: name2,
-//     amount: 234,
+//     event_id: 2,
+//     from: name2,
+//     to: name3,
+//     amount: 152,
 // },
 // ]
 
@@ -22,7 +22,7 @@ const eventTable = document.createElement("table");
 
 function forNewInput(item) {
     const row = eventTable.insertRow();
-    Object.values(item).forEach(text => {
+    Object.keys(item).forEach(key => {
         const cell = row.insertCell();
         const input = document.createElement("input");
         input.type = "text";
@@ -35,7 +35,7 @@ function forNewInput(item) {
 if (userName != null) {
     alert("You should log in");
     window.location.href = "sign_in.html";
-    throw Error("You are not logged in.")
+    throw new Error("You are not logged in.");
 
 }
 const currentUrl = window.location.href;
@@ -47,19 +47,23 @@ fetch("api/events/" + lastUrl)
     .then((dataJson) => {
         const dataReceived = JSON.parse(dataJson);
 
+// const dataReceived = fakeJSON;
+
         let isUserinBase = false;
 
         dataReceived.users.forEach(item => {
             if (item.username === userName) {
                 isUserinBase = true;
             }
+
             forNewInput(item);
         });
 
         if (!isUserinBase) {
-            dataReceived.push({userName, userId, spent: 0, paid: 0});
-            let newString = dataReceived[length-1]
-            forNewInput(item);
+            dataReceived.push({userName: username, userId: userid, spent: 0, paid: 0});
+            let newString = dataReceived[datdaReceived.length-1];
+            // forNewInput(item);
+            forNewInput(newString)
         }
 
         const sendButton = document.createElement("button");
@@ -76,6 +80,9 @@ fetch("api/events/" + lastUrl)
                 }
                 updatedData.push(rowData);
             }
+
+
+    console.log("Updated data to be sent:", JSON.stringify(updatedData));
 
             fetch("api/events/" + lastUrl, {
                 method: "PUT",
@@ -138,3 +145,5 @@ function showDebts(event) {
         console.error('Error:', error);
     });
 }
+
+
