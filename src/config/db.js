@@ -28,7 +28,7 @@ export const db = knex({
       password : PGPASSWORD,
       database : PGDATABASE,
       port: PGPORT,
-      ssl: {rejectUnauthorized: false},
+    //   ssl: {rejectUnauthorized: false},
     },
 });
 

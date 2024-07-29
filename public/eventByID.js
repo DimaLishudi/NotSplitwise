@@ -31,7 +31,7 @@ if (username === null) {
 
 function displayPaidSpentRow(item) {
     const row = eventTable.insertRow();
-    for (let key of ["use   rname", "paid", "spent"]) {
+    for (let key of ["username", "paid", "spent"]) {
         const cell = row.insertCell();
         const input = document.createElement("input");
         input.type = "text";
