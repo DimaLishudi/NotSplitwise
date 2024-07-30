@@ -16,7 +16,7 @@ export class HTTPError extends Error {
 
 export class NotFoundError extends HTTPError {
     constructor(id) {
-        super(404, `User #${id} Not Found`);
+        super(404, `User ${id} Not Found`);
     }
 }
 

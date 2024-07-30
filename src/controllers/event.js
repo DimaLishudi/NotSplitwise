@@ -30,7 +30,6 @@ export async function updateEventInfo(req, res) {
     
 export async function finaliseEvent(req, res) {
     try {
-        checkRequestFields(req, ["id"]);
         const eventInfo = await model.getEventInfo(req.params.id);
         if (eventInfo.finalised) {
             res.status(400).send({message: "Event already finalised"});
@@ -70,11 +69,14 @@ function calcUsersBalances(eventInfo) {
 }
 
 function calcDebtData(eventInfo) {
+    console.log("calcDebtData start");
     const {negative, positive} = calcUsersBalances(eventInfo);
     const debtData = []
 
     let neg_idx = 0;
     let pos_idx = 0;
+
+    console.log("calcDebtData mid");
     while (neg_idx < negative.length && pos_idx < positive.length) {
         const transfer = Math.min(negative[neg_idx].balance, positive[pos_idx].balance);
         negative[neg_idx].balance -= transfer;
@@ -101,7 +103,7 @@ function calcDebtData(eventInfo) {
 }
 
 function processDebtDataForDB(debtData) {
-    return [debtData].map(
+    return debtData.map(
         ({user_from, user_to, amount}) => 
             user_from < user_to ? {user_from, user_to, amount} : {user_to, user_from, amount: -amount}
     );

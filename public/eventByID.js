@@ -31,22 +31,28 @@ if (username === null) {
 
 function displayPaidSpentRow(item) {
     const row = eventTable.insertRow();
-    for (let key of ["username", "paid", "spent"]) {
+    for (let key of ["username", "spent", "paid"]) {
         const cell = row.insertCell();
         const input = document.createElement("input");
+
+        if (key == "username") {
+            input.readOnly = true;
+        }
         input.type = "text";
         input.name = key;
+        input.placeholder = key;
         input.value = item[key];
         cell.appendChild(input);
     };
 }
 
 function displayPaidSpentTable(data) {
-    console.log(data);
     let isUserinBase = false;
 
     data.users.forEach(item => {
-        if (item.username === username) {
+        console.log(item.username);
+        console.log(username);
+        if (item.username.toLowerCase() === username.toLowerCase()) {
             isUserinBase = true;
         }
 
@@ -54,7 +60,8 @@ function displayPaidSpentTable(data) {
     });
 
     if (!isUserinBase) {
-        const newRow = {username, user_id, spent: "Enter the amount spent", paid: "Enter the amount paid"}
+        console.log("add new user")
+        const newRow = {username, user_id, spent: "", paid: ""}
         data.users.push(newRow);
         displayPaidSpentRow(newRow)
     }
@@ -79,7 +86,7 @@ fetch(api_url)
                 updatedData.push(rowData);
             }
 
-
+            console.log(updatedData);
             fetch(api_url, {
                 method: "PUT",
                 headers: {

@@ -2,6 +2,7 @@ import { db } from "../config/db.js"
 import { NotFoundError } from "../errors/errors.js";
 
 export async function getPasswordHash(username) {
+    username = username.toLowerCase();
     const res = await db.raw(`
             SELECT users.id, hashpwd.password FROM hashpwd JOIN users
             ON hashpwd.user_id = users.id
@@ -15,7 +16,7 @@ export async function getPasswordHash(username) {
 }   
 
 export async function registerUser({username}, hash) {
-    // TODO: check if user exists etc
+    username = username.toLowerCase();
     const res = await db.transaction(async (trx) => {
         const [{id}, ] = await trx
             .insert({username}, ["id", "username"])

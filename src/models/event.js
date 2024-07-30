@@ -33,9 +33,8 @@ export async function getEventInfo(event_id) {
 
 export async function updateEventInfo(id, data) {
     const res = await db.transaction(async (trx) => {
-        const rows = data.users.map(({spent, user_id, paid}) => {
-            const out = {user_id, spent, paid, event_id: id};
-            return out;
+        const rows = data.map(({spent, username, paid}) => {
+            return {user_id, spent, paid, event_id: id};
         })
         console.log(rows);
         await trx
@@ -49,7 +48,7 @@ export async function updateEventInfo(id, data) {
 
         let total_spent = 0;
         let total_paid = 0;
-        for (let user of data.users) {
+        for (let user of data) {
             total_spent += user.spent;
             total_paid += user.paid;
         }

@@ -33,7 +33,7 @@ async function sendNewUser(event) {
         if (response.status == 200) {
             alert("User created successfully!");
         } else {
-            alert("Error creating user: " + data);
+            alert("Error creating user: " + data.message);
         }
     } catch(error) {
             console.error("Error:", error);
