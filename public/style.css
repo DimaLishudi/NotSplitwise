@@ -8,6 +8,7 @@ body {
     font-family: "Ubuntu", sans-serif;
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
 }
 h2 {
     font-size: 7vh;
@@ -72,7 +73,65 @@ section#currentEvent table {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    /* display: block;
-    justify-content: center; */
-    width: 70%;
+    max-width: 92%;
+}
+
+table td {
+    max-width: 30%;
+    font-size: 1.9vh;
+}
+
+table input {
+    color: rgb(29, 15, 15);
+}
+
+button {
+    border-style: none;
+    border-radius: 5%;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+a:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+#usersTable table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#tableUsersEvents, #tableDebts {
+	border: 1px solid #dddddd;
+	border-collapse: collapse; 
+    max-width: 90%;    
+}
+
+#tableUsersEvents th, #tableDebts th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+    min-width: 160px;
+    max-width: 250px;
+    font-size: 2vh;
+    color: black;
+}
+
+#tableUsersEvents td, #tableDebts td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+    min-width: 160px;
+    max-width: 250px;
+    font-size: 2vh;
 }

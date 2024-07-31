@@ -5,6 +5,7 @@ const origin = window.location.origin + "/";
 
 const id = localStorage.getItem("user_id");
 
+
 if (!id) {
     console.error("User not found in local storage.");
     window.location.href = "login.html"; 

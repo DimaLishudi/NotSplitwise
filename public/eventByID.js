@@ -12,12 +12,10 @@
 //     amount: 152,
 // },
 
-
 const username = localStorage.getItem("username");
-const user_id = localStorage.getItem("user_id")
+const user_id = localStorage.getItem("user_id");
 const eventSection = document.getElementById("currentEvent");
-const eventTable = document.createElement("table");
-
+const eventTable = document.getElementById("tableEvents");
 
 const currentUrl = window.location.href;
 const lastUrl = currentUrl.split('/').pop();
@@ -27,7 +25,6 @@ const api_url = origin + "api/events/" + lastUrl;
 if (username === null) {
     window.location.href = origin + "signup.html";
 }
-
 
 function displayPaidSpentRow(item) {
     const row = eventTable.insertRow();
@@ -43,7 +40,7 @@ function displayPaidSpentRow(item) {
         input.placeholder = key;
         input.value = item[key];
         cell.appendChild(input);
-    };
+    }
 }
 
 function displayPaidSpentTable(data) {
@@ -55,15 +52,13 @@ function displayPaidSpentTable(data) {
         if (item.username.toLowerCase() === username.toLowerCase()) {
             isUserinBase = true;
         }
-
         displayPaidSpentRow(item);
     });
 
     if (!isUserinBase) {
-        console.log("add new user")
-        const newRow = {username, user_id, spent: "", paid: ""}
+        const newRow = {username, user_id, spent: "", paid: ""};
         data.users.push(newRow);
-        displayPaidSpentRow(newRow)
+        displayPaidSpentRow(newRow);
     }
 }
 
@@ -86,7 +81,8 @@ fetch(api_url)
                 updatedData.push(rowData);
             }
 
-            console.log(updatedData);
+            console.log("Updated Data: ", updatedData); // Лог данных перед отправкой
+
             fetch(api_url, {
                 method: "PUT",
                 headers: {
@@ -113,8 +109,10 @@ fetch(api_url)
         console.error('Error:', error);
     });
 
-
-// final calculation of debts
+document.getElementById("addRow").addEventListener("click", () => {
+    const newRow = {username: "", user_id: "", spent: "", paid: ""};
+    displayPaidSpentRow(newRow);
+});
 
 document.getElementById("final").addEventListener("click", showDebts);
 
@@ -128,20 +126,18 @@ function showDebts(event) {
     fetch(api_url, {method: "POST"})
     .then(res => res.json())
     .then((dataJson) => {
-    //    const finalCalculation = JSON.parse(dataJson);
+        const finalSection = document.getElementById("final");
+        const debtsTable = document.createElement("table");
 
-       const finalSection = document.getElementById("final");
-       const debtsTable = document.createElement("table");
-
-       dataJson.forEach(item => {
-        const row = debtsTable.insertRow();
-        Object.values(item).forEach(text => {
-          const cell = row.insertCell();
-          cell.textContent = text;
+        dataJson.forEach(item => {
+            const row = debtsTable.insertRow();
+            Object.values(item).forEach(text => {
+                const cell = row.insertCell();
+                cell.textContent = text;
+            });
         });
-      });
-      
-      finalSection.appendChild(debtsTable);
+
+        finalSection.appendChild(debtsTable);
     })
     .catch((error) => {
         console.error('Error:', error);
